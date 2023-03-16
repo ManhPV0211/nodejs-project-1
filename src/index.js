@@ -3,6 +3,9 @@ const morgan = require("morgan");
 const { engine } = require("express-handlebars");
 const path = require("path");
 
+const router = require("./routers");
+const db = require("./config/db");
+
 const app = express();
 const PORT = 8080;
 
@@ -19,9 +22,8 @@ app.engine(".hbs", engine({
 app.set("views", path.join(__dirname, "/resources/views"));
 app.set("view engine", ".hbs");
 
-app.get("/", (req, res) => {
-    res.render("home")
-});
+router(app);
+db.connect();
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
