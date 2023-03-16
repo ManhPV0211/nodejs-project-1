@@ -1,7 +1,10 @@
+const Videos = require("../models/Video");
+
 class MyVideosController {
     // [GET] /my-videos
     myVideos(req, res, next) {
-        res.render("myVideos");
+        Videos.find({})
+            .then((video) => res.json(video))
     }
 };
 
